@@ -22,7 +22,7 @@ export function actionLog(text: unknown, exit?: number): void {
     if (exit) process.exit(exit);
 };
 
-export function executeGitCommand(command: string) {
+export async function executeGitCommand(command: string) {
     try {
         execSync(command, { stdio: 'inherit' });
     } catch (error) {

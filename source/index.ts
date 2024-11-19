@@ -60,12 +60,12 @@ fs.writeFileSync(pathQuote, markdownContent, 'utf-8');
 
 const commitMessage = getInput('commitMessage');
 
-executeGitCommand('git config --global user.name "Quote Updater"');
-executeGitCommand('git config --global user.email "actions@github.com"');
-executeGitCommand(`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+await executeGitCommand('git config --global user.name "Quote Updater"');
+await executeGitCommand('git config --global user.email "actions@github.com"');
+await executeGitCommand(`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
 
-executeGitCommand(`git add ${pathQuote}`);
-executeGitCommand(`git commit -m "${commitMessage}"`);
-executeGitCommand('git push');
+await executeGitCommand(`git add ${pathQuote}`);
+await executeGitCommand(`git commit -m "${commitMessage}"`);
+await executeGitCommand('git push');
 
 actionLog('📖 markdown file written with updated content.', 0);
