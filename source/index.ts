@@ -67,6 +67,6 @@ executeGitCommand(`git remote set-url origin https://x-access-token:${process.en
 
 executeGitCommand(`git add ${pathQuote}`);
 executeGitCommand(`git commit -m "${commitMessage}"`);
-executeGitCommand('git push');
+executeGitCommand('git push -f');
 
 actionLog('📖 markdown file written with updated content.', 0);
