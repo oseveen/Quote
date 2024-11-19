@@ -31,7 +31,7 @@ const typeQuote = quotesKeywords.find(q => q.toLowerCase() === typeInput.toLower
 if (!typeQuote)
     actionLog('📖 The quote type provided is invalid', 1);
 
-const response = await axios.get<Quote[]>(`https://zenquotes.io/api/today/${typeQuote}`);
+const response = await axios.get<Quote[]>(`https://zenquotes.io/api/random/${typeQuote}`);
 
 if (response.status !== 200)
     actionLog(`🚨 ${response.data[0].q}`, response.status);
@@ -60,12 +60,12 @@ fs.writeFileSync(pathQuote, markdownContent, 'utf-8');
 
 const commitMessage = getInput('commitMessage');
 
-await executeGitCommand('git config --global user.name "Quote Updater"');
-await executeGitCommand('git config --global user.email "actions@github.com"');
-await executeGitCommand(`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+executeGitCommand('git config --global user.name "Quote Updater"');
+executeGitCommand('git config --global user.email "actions@github.com"');
+executeGitCommand(`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
 
-await executeGitCommand(`git add ${pathQuote}`);
-await executeGitCommand(`git commit -m "${commitMessage}"`);
-await executeGitCommand('git push');
+executeGitCommand(`git add ${pathQuote}`);
+executeGitCommand(`git commit -m "${commitMessage}"`);
+executeGitCommand('git push');
 
 actionLog('📖 markdown file written with updated content.', 0);
