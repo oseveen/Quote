@@ -21,7 +21,7 @@ export async function executor(...commands) {
     }
 }
 export async function configureGit() {
-    execSync('git config --global user.name "Github Actions"', { stdio: 'inherit'})
+    execSync('git config --global user.name "Quote Updater"', { stdio: 'inherit'})
     execSync('git config --global user.email "actions@github.com"', { stdio: 'inherit'})
     execSync('`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`', { stdio: 'inherit' });
 }
