@@ -41,7 +41,7 @@ runs:
     
     - name: Run quote script
       shell: bash
-      run: npx tsx ${{ github.action_path }}/source/index.ts
+      run: node ${{ github.action_path }}/src/index.js
       env:
         INPUT_TYPEQUOTE: ${{ inputs.typeQuote }}
         INPUT_PATHQUOTE: ${{ inputs.pathQuote }}
