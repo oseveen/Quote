@@ -1,4 +1,4 @@
-import { exec } from 'child_process';
+import { exec, execSync } from 'child_process';
 import { promisify } from 'util';
 import { logger } from '#helpers/logger.js';
 import path from 'path';
@@ -21,7 +21,9 @@ export async function executor(...commands) {
     }
 }
 export async function configureGit() {
-    await executor('git config --global user.name "Github Actions"', 'git config --global user.email "actions@github.com"', `git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    execSync('git config --global user.name "Github Actions"', { stdio: 'inherit'})
+    execSync('git config --global user.email "actions@github.com"', { stdio: 'inherit'})
+    execSync('`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`', { stdio: 'inherit' });
 }
 ;
 export async function gitCommit(pathToFile, message = "Update markdown file") {
