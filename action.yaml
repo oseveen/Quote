@@ -29,6 +29,11 @@ runs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Setup git user
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
     - name: NodeJS
       uses: actions/setup-node@v3
       with:
